@@ -1,10 +1,12 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchProducts } from "../reduxtk/Slices/ProductSlice";
+import { useNavigate } from "react-router-dom";
 
 function Discounted() {
   const dispatch = useDispatch();
   const { products } = useSelector((state) => state.products);
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(fetchProducts());
@@ -21,6 +23,7 @@ function Discounted() {
                 product.discount && (
                   <div
                     key={product.id}
+                    onClick={() => navigate(`/productDetails/${product.id}`)}
                     className="bg-white/10 backdrop-blur-sm rounded-xl shadow-md hover:scale-105 transition-transform duration-300"
                   >
                     <img

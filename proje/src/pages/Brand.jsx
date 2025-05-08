@@ -1,12 +1,13 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchProducts } from "../reduxtk/Slices/ProductSlice";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 function Brand() {
   const dispatch = useDispatch();
   const { products } = useSelector((state) => state.products);
   const { brand } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(fetchProducts());
@@ -23,6 +24,7 @@ function Brand() {
                 product.brand.toLowerCase() === brand.toLowerCase() && (
                   <div
                     key={product.id}
+                    onClick={() => navigate(`/productDetails/${product.id}`)}
                     className="bg-white/10 backdrop-blur-sm rounded-xl shadow-md hover:scale-105 transition-transform duration-300"
                   >
                     <img
